@@ -1,5 +1,5 @@
-const name = process.argv[2];
-const hour = new Date().getHours();
+// This module exports a function that returns a greeting message based on the provided hour (0-23).
+// Depending on the hour, it returns "Good night", "Good morning", "Good afternoon", or "Good evening".
 
 function getGreeting(hour) {
   if(hour < 4 || hour > 22) {
@@ -15,6 +15,5 @@ function getGreeting(hour) {
 }
 
 
-const greeting = getGreeting(hour);
+module.exports = getGreeting;
 
-console.log(`${greeting}, ${name}!`);
