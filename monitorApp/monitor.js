@@ -20,7 +20,7 @@ function getSystemCPUInfo() {
         const usedmem = totalmem - freemem;
         console.clear();
         console.table(cpuUsage, ["core", "usage"],);
-        console.log("Total Memory: ", usedmem.toFixed(2), "MB");
+        console.log(`Total Memory: ${totalmem.toFixed(2)} MB | Used Memory: ${usedmem.toFixed(2)} MB | Free Memory: ${freemem.toFixed(2)} MB`);
     }, 1000);
 }
 
