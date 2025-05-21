@@ -1,77 +1,84 @@
 import * as readline from "node:readline/promises";
-import {stdin, stdout} from "node:process"
+import { stdin, stdout } from "node:process"
 import chalk from "chalk";
 
 
-import {CreateFolder, CreateFile, ReadFile} from "./fs.js";
+import { CreateFolder, CreateFile, ReadFile, WriteFile } from "./fs.js";
 
 const rl = readline.createInterface({
-    input: stdin,
-    output: stdout,
+      input: stdin,
+      output: stdout,
 });
 
-async function menu(){
+async function menu() {
 
-    console.log(chalk.blue.bold("\n 📁 Welcome to the File Manager!"));
+      console.log(chalk.blue.bold("\n 📁 Welcome to the File Manager!"));
 
-    const options = [
-        "1. Create Folder",
-        "2. Create File",
-        "3. Read File",
-        "4. Write to File",
-        "5. Delete File",
-        "6. Delete Folder",
-        "7. List Files",
-        "8. Exit"
-    ]
+      const options = [
+            "1. Create Folder",
+            "2. Create File",
+            "3. Read File",
+            "4. Write to File",
+            "5. Delete File",
+            "6. Delete Folder",
+            "7. List Files",
+            "8. Exit"
+      ]
 
-    console.log(chalk.green.bold("\n Please choose an option:\n",));
+      console.log(chalk.green.bold("\n Please choose an option:\n",));
 
-    options.forEach( (option, index) => {
-        console.log(" ",chalk.yellow(option));
-    });
+      options.forEach((option, index) => {
+            console.log(" ", chalk.yellow(option));
+      });
 
 
-   const ans = await rl.question(chalk.cyan.bold("\n Enter your option: "));
+      const ans = await rl.question(chalk.cyan.bold("\n Enter your option: "));
 
-    switch (ans) {
-          case "1":
-                const folderPath = await rl.question(chalk.cyan.bold("\n Enter the folder path: "));
-                await CreateFolder(folderPath);
-                console.log(chalk.green.bold("✔️Folder created :", folderPath));
-                break;
-          case "2":
-                const filePath = await rl.question(chalk.cyanBright.bold("\n Enter the file path: "));
-                const fileContent = await rl.question(chalk.cyanBright.bold("\n Enter the file content: "));
-                await CreateFile(filePath);
-                console.log(chalk.green.bold("✔️File created :", filePath));
-                break;
-          case "3":
-                const readFilePath = await rl.question(chalk.cyan.bold("\n Enter the file path to read: "));
-                const readFileContent = await ReadFile(readFilePath);
-                console.log(chalk.green.bold("\n📝 File content : \n", chalk.yellow(readFileContent), "\n"));
-                break;
-          case "4":
-                console.log(chalk.red.bold("Write to File"));
-                break;
-          case "5":
-                console.log(chalk.red.bold("Delete File"));
-                break;
-          case "6":
-                console.log(chalk.red.bold("Delete Folder"));
-                break;
-          case "7":
-                console.log(chalk.red.bold("List Files"));
-                break;
-          case "8":
-                console.log(chalk.red.bold("Exit"));
-                rl.close();
-                return;
-          default:
-                console.log(chalk.red.bold("Invalid option, please try again."));
-     }
-    
-     menu();
+      switch (ans) {
+            case "1":
+                  const folderPath = await rl.question(chalk.cyan.bold("\n Enter the folder path: "));
+                  await CreateFolder(folderPath);
+                  console.log(chalk.green.bold("✔️Folder created :", folderPath));
+                  break;
+            case "2":
+                  const filePath = await rl.question(chalk.cyanBright.bold("\n Enter the file path: "));
+                  const fileContent = await rl.question(chalk.cyanBright.bold("\n Enter the file content: "));
+                  await CreateFile(filePath, fileContent);
+                  console.log(chalk.green.bold("✔️File created :", filePath));
+                  break;
+            case "3":
+                  const readFilePath = await rl.question(chalk.cyan.bold("\n Enter the file path to read: "));
+                  const readFileContent = await ReadFile(readFilePath);
+                  console.log(chalk.green.bold("\n📝 File content : \n", chalk.yellow(readFileContent), "\n"));
+                  break;
+            case "4":
+                  const writeFilePath = await rl.question(chalk.cyan.bold("\n Enter the file path to write: "));
+                  const writeFileContent = await rl.question(chalk.cyan.bold("\n Enter the content to write: "));
+                  await WriteFile(writeFilePath, "\n" +  writeFileContent);
+                  console.log(chalk.green.bold("✔️File written :", writeFilePath));
+                  break;
+            case "5":
+                  const deleteFilePath = await rl.question(chalk.cyan.bold("\n Enter the file path to delete: "));
+                  await DeleteFile(deleteFilePath);
+                  console.log(chalk.green.bold("✔️File deleted :", deleteFilePath));
+                  break;
+            case "6":
+                  const deleteFolderPath = await rl.question(chalk.cyan.bold("\n Enter the folder path to delete: "));
+                  await DeleteFolder(deleteFolderPath);
+                  console.log(chalk.green.bold("✔️Folder deleted :", deleteFolderPath));
+                  break;
+            case "7":
+                  console.log(chalk.red.bold("List Files"));
+                  break;
+            case "8":
+                  console.log(chalk.red.bold("Exit"));
+                  rl.close();
+                  return;
+            default:
+                  console.log(chalk.red.bold("Invalid option, please try again."));
+      }
+
+      menu();
 }
 
 menu()

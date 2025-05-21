@@ -1,18 +1,17 @@
 
 import * as fs from 'node:fs/promises';
 
-export async function CreateFile(filePath) {
+export async function CreateFile(filePath, content) {
   try {
-    await fs.writeFile(filePath, '// This is a test file');
+    await fs.writeFile(filePath, content);
   } catch (error) {
     console.error(`Error creating file: ${error}`);
   }
 }
 
-export async function AppendToFile(filePath) {
+export async function WriteFile(filePath, content) {
   try {
-    await fs.appendFile(filePath, '\n h h h aaaa');
-  
+    await fs.appendFile(filePath, content)
   } catch (error) {
     console.error(`Error appending to file: ${error}`);
   }
@@ -54,6 +53,14 @@ export async function DeleteFile(filePath) {
   }
 }
 
+
+export async function DeleteFolder(folderPath) {
+  try {
+    await fs.rmdir(folderPath, { recursive: true });
+  } catch (error) {
+    console.error(`Error deleting folder: ${error}`);
+  }
+}
 
 export async function CreateFolder(folderPath) {
   try {

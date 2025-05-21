@@ -26,7 +26,10 @@ async function getSystemCPUInfo() {
     const usedmem = totalmem - freemem;
 
     console.clear();
+
+    // Display system stats
     console.log(chalk.bgMagenta(`============== System stats ==============`));
+    
     console.table(cpuUsage, ["core", "usage"]);
 
     console.log(chalk.bgCyan(`============== Memory stats ==============`));
@@ -34,10 +37,18 @@ async function getSystemCPUInfo() {
     console.log(
       usedmem > 10000
         ? chalk.redBright(
-            `Total Memory: ${totalmem.toFixed(2)} MB | Used Memory: ${usedmem.toFixed(2)} MB | Free Memory: ${freemem.toFixed(2)} MB`
+            `Total Memory: ${totalmem.toFixed(
+              2
+            )} MB | Used Memory: ${usedmem.toFixed(
+              2
+            )} MB | Free Memory: ${freemem.toFixed(2)} MB`
           )
         : chalk.greenBright(
-            `Total Memory: ${totalmem.toFixed(2)} MB | Used Memory: ${usedmem.toFixed(2)} MB | Free Memory: ${freemem.toFixed(2)} MB`
+            `Total Memory: ${totalmem.toFixed(
+              2
+            )} MB | Used Memory: ${usedmem.toFixed(
+              2
+            )} MB | Free Memory: ${freemem.toFixed(2)} MB`
           )
     );
     console.log(chalk.bgMagenta(`=========================================`));
@@ -48,7 +59,7 @@ async function getSystemCPUInfo() {
       const data = await getGpuInfo();
       // If GPU controllers are found, display their model and VRAM
       if (data.controllers && data.controllers.length > 0) {
-        const gpuInfo = data.controllers.map(ctrl => ({
+        const gpuInfo = data.controllers.map((ctrl) => ({
           Model: ctrl.model,
           vram: ctrl.vram,
         }));
@@ -66,8 +77,12 @@ async function getSystemCPUInfo() {
 
 // Calculate CPU usage percentage between two snapshots
 function calculateCPUUsage(oldCPUs, newCPUs) {
-  const oldTotal = Object.values(oldCPUs.times).reduce((acc, time) => acc + time);
-  const newTotal = Object.values(newCPUs.times).reduce((acc, time) => acc + time);
+  const oldTotal = Object.values(oldCPUs.times).reduce(
+    (acc, time) => acc + time
+  );
+  const newTotal = Object.values(newCPUs.times).reduce(
+    (acc, time) => acc + time
+  );
   const idleDiff = newCPUs.times.idle - oldCPUs.times.idle;
   const totalDiff = newTotal - oldTotal;
 
@@ -77,6 +92,3 @@ function calculateCPUUsage(oldCPUs, newCPUs) {
 
 // Run system stats display every second
 setInterval(getSystemCPUInfo, 3000);
-
-
-
