@@ -3,7 +3,8 @@ import { stdin, stdout } from "node:process"
 import chalk from "chalk";
 
 
-import { CreateFolder, CreateFile, ReadFile, WriteFile } from "./fs.js";
+import { CreateFolder, CreateFile, ReadFile, WriteFile,DeleteFile, DeleteFolder, ListFolder } from "./fs.js";
+import { type } from "node:os";
 
 const rl = readline.createInterface({
       input: stdin,
@@ -11,7 +12,7 @@ const rl = readline.createInterface({
 });
 
 async function menu() {
-
+      console.clear()
       console.log(chalk.blue.bold("\n 📁 Welcome to the File Manager!"));
 
       const options = [
@@ -68,7 +69,13 @@ async function menu() {
                   console.log(chalk.green.bold("✔️Folder deleted :", deleteFolderPath));
                   break;
             case "7":
-                  console.log(chalk.red.bold("List Files"));
+                  const listFolderPath = await rl.question(chalk.cyan.bold("\n Folder path [press Enter for current]: "));
+                  const files = await ListFolder(listFolderPath || './');
+                  files.forEach((file) => {
+                        const icon = file.type == 'folder' ? '📁' : '📄';
+
+                        console.log(icon, chalk.greenBright(file.name));
+                  })
                   break;
             case "8":
                   console.log(chalk.red.bold("Exit"));
@@ -78,7 +85,10 @@ async function menu() {
                   console.log(chalk.red.bold("Invalid option, please try again."));
       }
 
-      menu();
+      console.log(chalk.bgWhiteBright.black("\n----------------------End---------------------"))
+      console.log('\n')
+      await rl.question(chalk.blueBright("press any key"))
+      menu()
 }
 
 menu()

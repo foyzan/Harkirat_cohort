@@ -1,5 +1,25 @@
 
+import { time } from 'node:console';
 import * as fs from 'node:fs/promises';
+import path from 'node:path'
+import { type } from 'node:os';
+
+export async function ListFolder(listPath) {
+  try {
+    const list = await fs.readdir(listPath, { withFileTypes: true });
+    return list.map(item => {
+      return {
+        name : item.name,
+        type : item.isDirectory() ? "folder" : "file",
+        path : path.join(import.meta.dirname, item.name)
+      }
+    })
+  } catch (error) {
+    console.error(`Error listing folder: ${error}`);
+  }
+}
+
+
 
 export async function CreateFile(filePath, content) {
   try {
@@ -56,7 +76,7 @@ export async function DeleteFile(filePath) {
 
 export async function DeleteFolder(folderPath) {
   try {
-    await fs.rmdir(folderPath, { recursive: true });
+    await fs.rm(folderPath, { recursive: true });
   } catch (error) {
     console.error(`Error deleting folder: ${error}`);
   }
@@ -69,3 +89,4 @@ export async function CreateFolder(folderPath) {
     console.error(`Error creating folder: ${error}`);
   }
 }
+
