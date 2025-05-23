@@ -6,13 +6,15 @@ const server = createServer( function (req, res) {
 
     const dataStream = fs.createReadStream("./index.html")
 
-    dataStream.on('data', function(chunk){
-        res.write(chunk)
-    })
 
-    dataStream.on('end', function(){
-        res.end()
-    })
+    dataStream.pipe(res)
+    // dataStream.on('data', function(chunk){
+    //     res.write(chunk)
+    // })
+
+    // dataStream.on('end', function(){
+    //     res.end()
+    // })
 
 
 
