@@ -1,5 +1,7 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const port = 3000;
+const JWT_SECRET = "kslflsflsfljsf";
 const app = express();
 app.use(express.json());
 
@@ -77,8 +79,12 @@ app.post("/signin", function (req, res) {
     }
 
     if (foundUser) {
-        const newToken = tokenGenerator();
-        foundUser.token = newToken; // Update the token on the actual user object
+        const newToken = jwt.sign({
+            username: userName
+        }, JWT_SECRET);
+        // foundUser.token = newToken; // Update the token on the actual user object
+      
+      
         return res.json({ // <-- IMPORTANT: Added 'return' here
             msg: newToken,
         });
@@ -95,11 +101,14 @@ app.post("/signin", function (req, res) {
 app.get('/me', function (req, res) {
 
     const token = req.headers.token;
+    const decodedInfo = jwt.verify(token, JWT_SECRET);
+    const userName = decodedInfo.username;
+
 
     let foundUser = null;
 
     for (let i = 0; i < users.length; i++) {
-        if (users[i].token == token) {
+        if (users[i].userName == userName) {
             foundUser = users[i];
             break;
         }
@@ -108,6 +117,7 @@ app.get('/me', function (req, res) {
     if (foundUser) {
         return res.json({
             msg: foundUser.userName,
+            msg2: foundUser.pass,
         });
     } else {
         return res.json({
