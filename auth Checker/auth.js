@@ -90,6 +90,32 @@ app.post("/signin", function (req, res) {
     }
 });
 
+
+
+app.get('/me', function (req, res) {
+
+    const token = req.headers.token;
+
+    let foundUser = null;
+
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].token == token) {
+            foundUser = users[i];
+            break;
+        }
+    }
+
+    if (foundUser) {
+        return res.json({
+            msg: foundUser.userName,
+        });
+    } else {
+        return res.json({
+            msg: "invalid token",
+        });
+    }
+})
+
 app.listen(port, function () {
     console.log("server is running on ", port);
 });
