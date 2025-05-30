@@ -1,5 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+const cors = require('cors')
 const JWT_SECRET = "sklsfdfl";
 const app = express();
 const port = 3000;
@@ -10,7 +12,19 @@ const users = [
 ];
 
 app.use(express.json())
+app.use(cors({
+      origin: ['http://localhost:5500', 'http://127.0.0.1:5500']
+}));
 
+
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.post('/signup', function (req, res) {
     const username = req.body.username;
     const pass = req.body.pass;
@@ -65,7 +79,7 @@ app.post('/signin', function (req, res) {
 })
 
 
-app.use(function (req, res, next) {
+function tokenValidation (req, res, next) {
     const token = req.headers.token;
 
     try {
@@ -81,12 +95,12 @@ app.use(function (req, res, next) {
 
     } catch (error) {
         return res.json({
-            msg: "invalid token"
+            msg: "invalid token a"
         })
     }
-})
+}
 
-app.get('/me', function (req, res) {
+app.get('/me',tokenValidation, function (req, res) {
     const user = req.verifyUser;
     return res.json(user);
 })
