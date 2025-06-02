@@ -1,12 +1,13 @@
 const express = require('express');
 const JWT = require('jsonwebtoken');
+const link = require('./connect');
 const JWT_SECRET = 'sldflskdf11234';
 const {userModel, todoModel} = require('./db')
 const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
 // Connect to MongoDB
-mongoose.connect("")
+mongoose.connect(link)
 // Middleware to parse JSON bodies
 app.use(express.json());    
 
