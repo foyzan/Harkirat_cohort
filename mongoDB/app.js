@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://admin:bK852IrGwcbwtQTM@cluster0.m6nlwln.mongodb.net/todoDB")
+mongoose.connect("")
 // Middleware to parse JSON bodies
 app.use(express.json());    
 
