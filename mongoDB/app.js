@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const { z } = require('zod');
 const JWT = require('jsonwebtoken');
 const link = require('./connect');
 const JWT_SECRET = 'sldflskdf11234';
@@ -16,10 +17,28 @@ app.use(express.json());
 // Basic route  
 
 app.post('/signup', async function (req, res) {
+    // Validate request body using zod
+        // Define the schema for the request body
+            // This schema requires username, password, email, and name to be strings
+    const requireBody = z.object({
+        username: z.string().min(3, 'Username must be at least 3 characters long').max(20, 'Username must be at most 20 characters long'),
+        password: z.string().min(6, 'Password must be at least 6 characters long').max(63, 'Password must be at most 63 characters long'),
+        email: z.string().email("provide a valid email"),
+        name: z.string().min(3, "minimum 3 character").max(40, "maximum 40 character")
+    })
+
+    const parsedBody = requireBody.safeParse(req.body);
+    if (!parsedBody.success) {
+        return res.status(400).json({ message: 'Invalid request body', errors: parsedBody.error.issues });
+    }
+
+
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
     const name = req.body.name;
+
+
 
     try {
         const hashedPassword = await bcrypt.hash(password, 5);
@@ -31,16 +50,27 @@ app.post('/signup', async function (req, res) {
         })
 
     } catch (error) {
-        res.json({ message: 'Error creating user', error: error.message });
+        res.json({ message: 'user already exist', error: error.message });
         return;
     }
     res.status(201).send({ message: 'You have signed up successfully!' });
 })
 
 app.post('/signin', async function (req, res) {
+    // Validate request body using zod
+        // Define the schema for the request body
+    requireBody = z.object({
+        email: z.string().email("provide a valid email"),
+        password: z.string().min(6, 'Password must be at least 6 characters long').max(63, 'Password must be at most 63 characters long'),
+    })
+
+    const parsedBody = requireBody.safeParse(req.body);
+    if (!parsedBody.success) {
+        return res.status(400).json({ message: 'Invalid request body', errors: parsedBody.error.issues });
+    }
+
     const email = req.body.email;
     const password = req.body.password;
-
     const user = await userModel.findOne({
         email: email,
     });
