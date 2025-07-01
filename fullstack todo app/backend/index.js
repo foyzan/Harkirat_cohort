@@ -22,3 +22,7 @@ app.post("/todos", function(req, res){
 app.put("/completed", function(req, res){
 
 })
+
+app.delete("/", function(){
+    
+})
