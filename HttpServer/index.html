@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foyzan Ahmed Apon - Full Stack Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for smooth scrolling and general typography */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate-900 */
+            color: #f8fafc; /* Slate-50 */
+        }
+        .section-heading {
+            @apply text-4xl font-bold text-center mb-12 text-blue-400;
+        }
+        .card {
+            @apply bg-slate-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
+        }
+        .btn-primary {
+            @apply inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300 shadow-md;
+        }
+        .btn-secondary {
+            @apply inline-block border border-blue-600 text-blue-400 px-6 py-3 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-colors duration-300;
+        }
+        /* Animation for section reveal */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-slate-900 p-4 shadow-lg fixed w-full z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#hero" class="text-blue-400 text-2xl font-bold rounded-lg p-2 hover:text-blue-300 transition-colors">Foyzan Ahmed Apon</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-slate-200 hover:text-blue-400 transition-colors font-medium">About</a>
+                <a href="#skills" class="text-slate-200 hover:text-blue-400 transition-colors font-medium">Skills</a>
+                <a href="#projects" class="text-slate-200 hover:text-blue-400 transition-colors font-medium">Projects</a>
+                <a href="#contact" class="text-slate-200 hover:text-blue-400 transition-colors font-medium">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-slate-200 focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 mt-4 rounded-lg shadow-md">
+            <a href="#about" class="block py-3 px-4 text-slate-200 hover:bg-slate-700 rounded-t-lg transition-colors">About</a>
+            <a href="#skills" class="block py-3 px-4 text-slate-200 hover:bg-slate-700 transition-colors">Skills</a>
+            <a href="#projects" class="block py-3 px-4 text-slate-200 hover:bg-slate-700 transition-colors">Projects</a>
+            <a href="#contact" class="block py-3 px-4 text-slate-200 hover:bg-slate-700 rounded-b-lg transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <section id="hero" class="relative h-screen flex items-center justify-center text-center bg-gradient-to-br from-slate-900 to-blue-900 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-dots opacity-10"></div>
+            <style>
+                .bg-dots {
+                    background-image: radial-gradient(circle, #334155 1px, transparent 1px);
+                    background-size: 20px 20px;
+                }
+            </style>
+        </div>
+        <div class="z-10 p-8 max-w-4xl mx-auto rounded-xl bg-slate-800 bg-opacity-70 shadow-2xl backdrop-blur-sm">
+            <img src="https://media.licdn.com/dms/image/v2/D5603AQEa7vmRAOMacQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1675836108115?e=1753315200&v=beta&t=rRJ46K76fVPA3-bK_BVjNonObxgk-XEMt4xcDWOcrVA" alt="Foyzan Ahmed Apon Photo" class="rounded-full w-36 h-36 mx-auto mb-6 border-4 border-blue-400 shadow-lg">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Hi, I'm <span class="text-blue-400">Foyzan Ahmed Apon</span></h1>
+            <p class="text-2xl md:text-3xl text-slate-200 mb-8">A passionate Full Stack Developer</p>
+            <p class="text-lg text-slate-300 mb-10 max-w-2xl mx-auto">
+                Building robust and scalable web applications with a focus on user experience and efficient backend solutions.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#projects" class="btn-primary">View My Work <i class="fas fa-arrow-right ml-2"></i></a>
+                <a href="#contact" class="btn-secondary">Get in Touch <i class="fas fa-envelope ml-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 px-4 fade-in-section">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="section-heading">About Me</h2>
+            <div class="card text-lg leading-relaxed">
+                <p class="mb-4">
+                    Hello! I'm a dedicated Full Stack Developer with a strong foundation in both front-end and back-end technologies. My journey in development began with a fascination for how digital experiences are crafted, leading me to master a diverse set of tools and languages.
+                </p>
+                <p class="mb-4">
+                    I thrive on solving complex problems and building intuitive, high-performance applications. Whether it's designing a responsive user interface with React and Tailwind CSS, or architecting robust server-side logic with Node.js and Express, I'm committed to delivering clean, efficient, and maintainable code.
+                </p>
+                <p>
+                    Beyond coding, I'm always eager to learn new technologies and stay updated with industry best practices. I enjoy collaborating with teams, contributing to open-source projects, and continuously refining my craft. Let's build something amazing together!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-20 px-4 bg-slate-900 fade-in-section">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="section-heading">My Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="card text-center">
+                    <i class="fab fa-html5 text-blue-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">HTML5</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fab fa-css3-alt text-blue-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">CSS3</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fas fa-wind text-blue-400 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">Tailwind CSS</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fab fa-js-square text-yellow-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">JavaScript</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fab fa-react text-blue-400 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">React.js</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fab fa-node-js text-green-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">Node.js</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fas fa-server text-gray-400 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">Express.js</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fab fa-linux text-gray-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">Linux Server</h3>
+                </div>
+                <div class="card text-center">
+                    <i class="fab fa-aws text-orange-500 text-4xl mb-3"></i>
+                    <h3 class="text-xl font-semibold">AWS Basics</h3>
+                </div>
+                </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 px-4 fade-in-section">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="section-heading">My Projects</h2>
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 px-4 bg-slate-900 fade-in-section">
+        <div class="container mx-auto max-w-2xl">
+            <h2 class="section-heading">Get in Touch</h2>
+            <div class="card">
+                <p class="text-center text-lg mb-8">
+                    Have a question or want to collaborate? Feel free to reach out!
+                </p>
+                <form id="contact-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-slate-300 text-sm font-bold mb-2">Name</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-slate-900 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-200" placeholder="Your Name" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-slate-300 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-slate-900 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-200" placeholder="your.email@example.com" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-slate-300 text-sm font-bold mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-slate-900 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-200" placeholder="Your message..." required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary w-full sm:w-auto">Send Message <i class="fas fa-paper-plane ml-2"></i></button>
+                    </div>
+                </form>
+                <div id="form-message" class="mt-4 text-center text-green-400 hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 py-8 px-4 text-center text-slate-400 text-sm">
+        <div class="container mx-auto">
+            <p>&copy; <span id="current-year"></span> Foyzan Ahmed Apon. All rights reserved.</p>
+            <div class="mt-4 space-x-6">
+                <a href="https://github.com/yourusername" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i class="fab fa-github text-2xl"></i></a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="text-slate-400 hover:text-blue-400 transition-colors"><i class="fab fa-linkedin text-2xl"></i></a>
+                </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- JavaScript for dynamic content and interactivity ---
+
+        // 1. Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Smooth Scrolling for Navigation Links
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 3. Dynamically Load Projects
+        const projects = [
+            {
+                title: "PayTM Clone (Full Stack)",
+                description: "A full-stack clone of the PayTM application, demonstrating secure payment processing, user authentication, and transaction management.",
+                image: "https://placehold.co/400x250/1e293b/94a3b8?text=PayTM+Clone",
+                technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Payment Gateway Integration"],
+                liveLink: "#", // Replace with actual link
+                githubLink: "#" // Replace with actual link
+            },
+            {
+                title: "LeetCode Clone (Full Stack)",
+                description: "A full-stack platform mimicking LeetCode, featuring problem submission, code execution, user profiles, and a leaderboard.",
+                image: "https://placehold.co/400x250/1e293b/94a3b8?text=LeetCode+Clone",
+                technologies: ["React", "Node.js", "Express.js", "PostgreSQL", "Code Runner Integration", "Tailwind CSS"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                title: "E-commerce Platform",
+                description: "A full-fledged e-commerce application built with React, Node.js, Express, and MongoDB. Features include user authentication, product catalog, shopping cart, and order management.",
+                image: "https://placehold.co/400x250/1e293b/94a3b8?text=E-commerce+App",
+                technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
+                liveLink: "#", // Replace with actual link
+                githubLink: "#" // Replace with actual link
+            },
+            {
+                title: "Task Management API",
+                description: "A RESTful API for managing tasks, users, and projects. Developed with Node.js, Express, and PostgreSQL, featuring JWT authentication and comprehensive CRUD operations.",
+                image: "https://placehold.co/400x250/1e293b/94a3b8?text=Task+API",
+                technologies: ["Node.js", "Express.js", "PostgreSQL", "JWT"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                title: "Real-time Chat Application",
+                description: "A real-time chat application using React for the frontend and Socket.IO with Node.js for instant messaging. Supports multiple chat rooms and user presence.",
+                image: "https://placehold.co/400x250/1e293b/94a3b8?text=Chat+App",
+                technologies: ["React", "Node.js", "Socket.IO", "CSS"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                title: "Portfolio Website V1 (This one!)",
+                description: "The very portfolio you're viewing, designed and built with HTML, Tailwind CSS, and vanilla JavaScript to showcase core web development skills.",
+                image: "https://placehold.co/400x250/1e293b/94a3b8?text=Portfolio+V1",
+                technologies: ["HTML", "CSS", "Tailwind CSS", "JavaScript"],
+                liveLink: "#",
+                githubLink: "#"
+            }
+            // Add more projects here
+        ];
+
+        const projectsGrid = document.getElementById('projects-grid');
+
+        projects.forEach(project => {
+            const projectCard = document.createElement('div');
+            projectCard.classList.add('card', 'flex', 'flex-col', 'h-full');
+            projectCard.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover rounded-lg mb-4 border border-slate-700">
+                <h3 class="text-2xl font-semibold text-blue-300 mb-2">${project.title}</h3>
+                <p class="text-slate-300 mb-4 flex-grow">${project.description}</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    ${project.technologies.map(tech => `<span class="bg-blue-800 text-blue-200 text-xs font-medium px-2.5 py-0.5 rounded-full">${tech}</span>`).join('')}
+                </div>
+                <div class="flex justify-start space-x-4 mt-auto">
+                    <a href="${project.liveLink}" target="_blank" class="btn-primary text-sm px-4 py-2">Live Demo <i class="fas fa-external-link-alt ml-1"></i></a>
+                    <a href="${project.githubLink}" target="_blank" class="btn-secondary text-sm px-4 py-2">GitHub <i class="fab fa-github ml-1"></i></a>
+                </div>
+            `;
+            projectsGrid.appendChild(projectCard);
+        });
+
+        // 4. Contact Form Submission (Client-side only)
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent actual form submission
+
+            // In a real application, you would send this data to a backend server
+            // using fetch() or XMLHttpRequest.
+            console.log('Form Submitted!');
+            console.log('Name:', document.getElementById('name').value);
+            console.log('Email:', document.getElementById('email').value);
+            console.log('Message:', document.getElementById('message').value);
+
+            // Simulate success
+            formMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            formMessage.classList.remove('hidden');
+            formMessage.classList.add('text-green-400'); // Ensure it's green for success
+
+            // Clear the form
+            contactForm.reset();
+
+            // Hide message after a few seconds
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
+
+        // 5. Section Reveal on Scroll
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+
+        const observerOptions = {
+            root: null, // relative to the viewport
+            rootMargin: '0px',
+            threshold: 0.1 // 10% of the section must be visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, observerOptions);
+
+        fadeInSections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // 6. Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 7. Update your name and photo placeholder
+        // You can replace "Your Name" in the HTML directly, or use JS if you prefer.
+        // For the photo, replace the placeholder URL in the hero section's <img> tag.
+        // Example: document.querySelector('.hero img').src = 'path/to/your/photo.jpg';
+    </script>
+</body>
+</html>
